@@ -1,4 +1,5 @@
 {% extends "blog/base.html" %}
+{% load blog_tags %}
 {% load crispy_forms_tags %}
 {% block title %}{{ post.title }}{% endblock %}
 
@@ -8,7 +9,7 @@
 <p class="badge badge-secondary">
     Published {{ post.publish }} by {{ post.author }}
 </p>
-{{ post.body|linebreaks }}
+{{ post.body|safe}}
 <p>
     <a href="{% url "blog:post_share" post.id %}">
         Share this post
