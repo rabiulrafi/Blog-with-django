@@ -9,9 +9,9 @@
 <p class="badge badge-secondary">
     Published {{ post.publish }} by {{ post.author }}
 </p>
-{{ post.body|safe}}
+<p style="font-family: 'Roboto Slab', serif;">{{ post.body|safe}}</p>
 <p>
-    <a href="{% url "blog:post_share" post.id %}">
+    <a href="{% url 'blog:post_share' post.id %}">
         Share this post
     </a>
 </p>
@@ -23,23 +23,55 @@
 {% empty %}
 There are no similar posts yet.
 {% endfor %}
-{% with comments.count as total_comments %}
+<!-- {% with comments.count as total_comments %}
 <h2>
     {{ total_comments }} comment{{ total_comments|pluralize }}
 </h2>
-{% endwith %}
-
+{% endwith %} -->
+<!--     <div class="card">
+        <div class="card-body">
 {% for comment in comments %}
-<div class="comment">
+
+            <div class="comment">
     <p>
         <span class="badge badge-info">Comment{{ forloop.counter }} by {{ comment.name }}
             {{ comment.created }}</span>
     </p>
     {{ comment.body|linebreaks }}
-</div>
+    <hr>
+            </div>
 {% empty %}
-<p>There are no comments yet.</p>
+    <p>There are no comments yet.</p>
+
 {% endfor %}
+
+</div>
+    </div> -->
+
+<h3 class="text-success">{{ comments.count }} comment{{ comments.count|pluralize }}</h3>
+<div class="container bootstrap snippet">
+{% for comment in comments %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="blog-comment">
+                
+                <hr/>
+                <ul class="comments">
+                <li class="clearfix">
+                  <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
+                  <div class="post-comments">
+                      <p class="meta">{{ comment.created }} <a href="#">{{ comment.name }}</a> says : <i class="pull-right"><a href="#"><small>Reply</small></a></i></p>
+                      <p>
+                        {{ comment.body|linebreaks }}
+                      </p>
+                  </div>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>    
 {% if new_comment %}
 <h2>Your comment has been added.</h2>
 <form class="form-group" method="post">
