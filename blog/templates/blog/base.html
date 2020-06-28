@@ -4,6 +4,8 @@
 <html>
 
 <head>
+
+
     <title>{% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.ckeditor.com/4.14.1/standard-all/ckeditor.js"></script>
@@ -23,10 +25,32 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+/* width */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #9e05fc; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(4deg, rgba(26,170,173,1) 31%, rgba(158,5,252,1) 68%);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(4deg, rgba(26,170,173,1) 31%, rgba(158,5,252,1) 68%);
+}
+</style>
 
 </head>
 
@@ -74,6 +98,37 @@
    
 </body>
  -->
+<!-- header role="banner" -->
+<header class="container">
+   <nav class="navbar navbar-expand-lg navbar-dark bg-darki py-4">
+  <a class="navbar-brand" href="#">Django Mania</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'blog:post_list'%} ">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Python</a>
+      </li>
+            <li class="nav-item">
+        <a class="nav-link" href="#">My Projects</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">About Me</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'blog:post_search'%}" novalidate>
+      <input type="text" name="query" class="textinput textInput form-control btn-outline-darki mr-2" required="" id="id_query" placeholder="Search">
+      
+      <input class="btn btn-outline-darki my-2 my-sm-0" type="submit" name="" value="Search">
+    </form>
+  </div>
+</nav>
+</header>
 
  <body>
 <div class="page-wrapper chiller-theme toggled">
@@ -83,7 +138,7 @@
   <nav id="sidebar" class="sidebar-wrapper">
     <div class="sidebar-content">
       <div class="sidebar-brand">
-        <a href="{% url 'blog:post_list'%} ">Home</a>
+        <a href="#">Django Mania</a>
         <div id="close-sidebar">
           <i class="fas fa-times"></i>
         </div>
@@ -105,7 +160,7 @@
         </div>
       </div>
       <!-- sidebar-header  -->
-      <div class="sidebar-search">
+     <!--  <div class="sidebar-search">
         <div>
           <div class="input-group">
             <input type="text" class="form-control search-menu" placeholder="Search...">
@@ -116,14 +171,14 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- sidebar-search  -->
       <div class="sidebar-menu">
         <ul>
           <li class="header-menu">
             <span>General</span>
           </li>
-          <li class="sidebar-dropdown">
+<!--           <li class="sidebar-dropdown">
             <a href="#">
               <i class="fa fa-tachometer-alt"></i>
               <span>Dashboard</span>
@@ -229,27 +284,23 @@
                 </li>
               </ul>
             </div>
-          </li>
-          <li class="header-menu">
-            <span>Extra</span>
-          </li>
+          </li> -->
           <li>
             <a href="#">
               <i class="fa fa-book"></i>
-              <span>Documentation</span>
-              <span class="badge badge-pill badge-primary">Beta</span>
+              <span>Essential Books</span>
             </a>
           </li>
           <li>
             <a href="#">
               <i class="fa fa-calendar"></i>
-              <span>Calendar</span>
+              <span>Tags</span>
             </a>
           </li>
           <li>
             <a href="#">
               <i class="fa fa-folder"></i>
-              <span>Examples</span>
+              <span>Source Code</span>
             </a>
           </li>
         </ul>
@@ -257,7 +308,7 @@
       <!-- sidebar-menu  -->
     </div>
     <!-- sidebar-content  -->
-    <div class="sidebar-footer">
+<!--     <div class="sidebar-footer">
       <a href="#">
         <i class="fa fa-bell"></i>
         <span class="badge badge-pill badge-warning notification">3</span>
@@ -273,7 +324,7 @@
       <a href="#">
         <i class="fa fa-power-off"></i>
       </a>
-    </div>
+    </div> -->
   </nav>
   <!-- sidebar-wrapper  -->
   <main class="page-content">
@@ -287,9 +338,9 @@
     <div class="row">
         {% for post in most_commented_posts %}
                 
-      <div class="col-md-3 d-flex align-items-stretch">
+      <div class="col-md-3 d-flex align-items-stretch mt-2">
          <div class="card">
-            <img class="card-img-top" src="//placeimg.com/280/180/tech" alt="Card image cap">
+            <img class="card-img-top" src="{% static 'images/tech.jpg' %}" alt="Card image cap">
             <div class="card-body">
                <h5 class="card-title border-bottom pb-3"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a> <a href="{% url 'blog:post_share' post.id %}" class="float-right d-inline-flex share"><i class="fas fa-share-alt text-primary"></i></a></h5>
                <p class="card-text">{{ post.body|safe|truncatewords_html:10 }}</p>
@@ -312,7 +363,7 @@
           <a href="https://github.com/rabiulrafi" target="_blank">
             <img alt="GitHub followers" src="https://img.shields.io/github/followers/rabiulrafi?label=github&style=social" />
           </a>
-          <a href="https://twitter.com/azouaoui_med" target="_blank">
+          <a href="https://twitter.com/rabiulrafi" target="_blank">
             <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/rabiulrafi?label=twitter&style=social" />
           </a>
         </div>

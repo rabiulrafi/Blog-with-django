@@ -7,7 +7,7 @@
 {% for post in posts %}
 
 <div class="d-flex justify-content-center row mt-3 ">
-    <div class="col-10 card">
+    <div class="col-10 card shadow">
         <div class="card-body">
         <h2 style="font-family: 'Roboto Slab', serif;">
             <a href="{{ post.get_absolute_url }}">
@@ -24,10 +24,11 @@
             {% if not forloop.last %}, {% endif %}
             {% endfor %}
         </p>
-        <p class="badge badge-secondary">
-            Published {{ post.publish }} by {{ post.author }}
+        <p >
+            Published <i class="badge badge-secondary" style="color: #000">{{ post.publish }}</i> by <i class="badge badge-secondary" style="color: #000">{{ post.author }}</i> Comments: <i class="badge badge-secondary" style="color: #000">{{post.comments.count}}</i>
         </p>
-        <p style="font-family: 'Roboto Slab', serif;">{{ post.body|safe|truncatewords_html:30 }}</p>
+        <p style="font-family: 'Roboto Slab', serif;">{{ post.body|safe|truncatewords_html:15 }}</p>
+        <a href="{{ post.get_absolute_url }}" class="float-right">Read more <i class="fas fa-angle-double-right"></i></a>
         </div>
     </div>
 </div>
